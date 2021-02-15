@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="formElem">
+    <label for="giphyName">
+        <input id="giphyName" type="text"/>
+    </label>
+    <button type="submit" onclick="getElements()">Find</button>
+</form>
+<div id="output"></div>
+</body>
+<script>
+    let apiKey = 'p5XWYYqQ4x87VKoGxy5n5Zm0cgccPpBD';
+    let searchTerm = document.getElementById('giphyName');
+    let output = document.getElementById('output');
+    function getElements() {
+
+        var userInput = searchTerm.trim();
+        console.log(searchTerm);
+
+        userInput = userInput.replace(/ /g, "+");
+        fetch(`https://api.giphy.com/v1/gifs/search?&q=${userInput}&limit=100&api_key=${apiKey}`)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json.data)
+                json.data
+                    .map(gif => gif.images.fixed_height.url)
+                    .forEach(url => {
+                        let img = document.createElement('img');
+                        img.src = url;
+                        output.appendChild(img);
+                    })
+            })
+            .catch(error => document.body.appendChild = error)
+    }
+</script>
+</html>

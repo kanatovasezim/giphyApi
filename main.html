@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<body>
+<!--4. Отправить fetch запрос на "https://jsonplaceholder.typicode.com/posts". Получить данные и вывести их на страницу.-->
+<!--5. Giphy API (прочитать документацию API, парсить и выводить гифки по запросу т.е если вводишь в инпут “tom and jerry” -->
+<!--страница должна будет отобразить соответствующие гифки)-->
+
+<div id="output"></div>
+</body>
+<script>
+    const URL = "https://jsonplaceholder.typicode.com/posts";
+    let output = document.getElementById('output');
+    fetch(URL)
+        .then(response => response.json())
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(err => console.log(err));
+    function appendData(data) {
+        var mainContainer = document.getElementById("output");
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML += 'Title: ' + data[i].title + '<br>' + 'Body: ' + data[i].body + '<br><br>';
+            mainContainer.appendChild(div);
+        }
+    }
+</script>
+</html>
