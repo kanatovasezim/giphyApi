@@ -9,7 +9,7 @@
     <label for="giphyName">
         <input id="giphyName" type="text"/>
     </label>
-    <button type="submit" onclick="getElements()">Find</button>
+    <button type="submit" onclick="getElements(event)">Find</button>
 </form>
 <div id="output"></div>
 </body>
@@ -17,7 +17,8 @@
     let apiKey = 'p5XWYYqQ4x87VKoGxy5n5Zm0cgccPpBD';
     let searchTerm = document.getElementById('giphyName');
     let output = document.getElementById('output');
-    function getElements() {
+    function getElements(e) {
+        e.preventDefault();
         let userInput = searchTerm.value.trim().replace(/ /g, "+");
         fetch(`https://api.giphy.com/v1/gifs/search?&q=` + userInput + `&limit=100&api_key=` + apiKey)
             .then(response => response.json())
